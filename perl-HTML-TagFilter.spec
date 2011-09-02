@@ -11,9 +11,6 @@ License: Artistic/GPL
 Group: Development/Perl
 URL: http://search.cpan.org/dist/HTML-TagFilter/
 
-Packager: Dries Verachtert <dries@ulyssis.org>
-Vendor: Dag Apt Repository, http://dag.wieers.com/apt/
-
 Source: http://www.cpan.org/modules/by-module/HTML/HTML-TagFilter-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
