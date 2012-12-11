@@ -1,22 +1,20 @@
-%define perl_vendorlib %(eval "`%{__perl} -V:installvendorlib`"; echo $installvendorlib)
-%define perl_vendorarch %(eval "`%{__perl} -V:installvendorarch`"; echo $installvendorarch)
+%define upstream_name HTML-TagFilter
+%define upstream_version 1.03
 
-%define real_name HTML-TagFilter
+Summary:	Fine-grained html-filter, xss-blocker and mailto-obfuscator
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	1
+Epoch:		1
+License:	Artistic/GPL
+Group:		Development/Perl
+URL:		http://search.cpan.org/dist/HTML-TagFilter/
+Source:		http://www.cpan.org/modules/by-module/HTML/%{upstream_name}-%{upstream_version}.tar.gz
 
-Summary: Fine-grained html-filter, xss-blocker and mailto-obfuscator
-Name: perl-HTML-TagFilter
-Version: 1.03
-Release: %mkrel 1
-License: Artistic/GPL
-Group: Development/Perl
-URL: http://search.cpan.org/dist/HTML-TagFilter/
-
-Source: http://www.cpan.org/modules/by-module/HTML/HTML-TagFilter-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-
-BuildArch: noarch
-BuildRequires: perl
-BuildRequires: perl(ExtUtils::MakeMaker)
+BuildRequires:	perl-devel
+BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	perl(HTML::Parser)
+BuildArch:	noarch
 
 %description
 HTML::TagFilter is a subclass of HTML::Parser with a
@@ -26,25 +24,29 @@ specify permitted tags, permitted attributes of each tag, and permitted
 values for each attribute in as much detail as you like.
 
 %prep
-%setup -n %{real_name}-%{version}
+%setup -qn %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS="vendor" PREFIX="%{buildroot}%{_prefix}"
-%{__make} %{?_smp_mflags}
+perl Makefile.PL INSTALLDIRS=vendor
+make
+
+%check
+make test
 
 %install
-%{__rm} -rf %{buildroot}
-%{__make} pure_install
-
-### Clean up buildroot
-find %{buildroot} -name .packlist -exec %{__rm} {} \;
-
-%clean
-%{__rm} -rf %{buildroot}
+%makeinstall_std
 
 %files
-%defattr(-, root, root, 0755)
 %doc Changes README
-%doc %{_mandir}/man3/*
+%{_mandir}/man3/*
 %{perl_vendorlib}/HTML/TagFilter.pm
 
+%changelog
+* Fri Sep 02 2011 Александр Казанцев <kazancas@mandriva.org> 1.03-1mdv2012.0
++ Revision: 697895
+- imported package perl-HTML-TagFilter
+- imported package perl-HTML-TagFilter
+
+
+* Wed Jan 12 2011 Alexander Kazancev <kazancas@mandriva.ru> - 1.03-1
+- Rebuild for Mandriva
