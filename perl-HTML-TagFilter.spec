@@ -8,7 +8,7 @@ Release:	3
 Epoch:		1
 License:	Artistic/GPL
 Group:		Development/Perl
-URL:		http://search.cpan.org/dist/HTML-TagFilter/
+URL:		https://search.cpan.org/dist/HTML-TagFilter/
 Source:		http://www.cpan.org/modules/by-module/HTML/%{upstream_name}-%{upstream_version}.tar.gz
 
 BuildRequires:	perl-devel
