@@ -11,6 +11,7 @@ Group:		Development/Perl
 URL:		https://search.cpan.org/dist/HTML-TagFilter/
 Source:		http://www.cpan.org/modules/by-module/HTML/%{upstream_name}-%{upstream_version}.tar.gz
 
+BuildRequires:	make
 BuildRequires:	perl-devel
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	perl(HTML::Parser)
